@@ -31,14 +31,14 @@ namespace WindowsFormsApplication1
                 if (!clt)
                 {
 
-                    if (dateTimePicker1.Visible && dateTimePicker3.Visible)
+                    if (dateTimePicker1.Visible && dateTimePicker2.Visible)
                     {
                         ent = dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text;
                         sai = dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text;
                         comando = new SqlCommand("INSERT INTO ponto_estagio (entrada,saida) VALUES ('" + ent + "','" + sai + "')", Conectar());
                         comando.ExecuteNonQuery();
                     }
-                    else if (dateTimePicker1.Visible && !dateTimePicker3.Visible)
+                    else if (dateTimePicker1.Visible && !dateTimePicker2.Visible)
                     {
                         ent = dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text;
                         comando = new SqlCommand("INSERT INTO ponto_estagio (entrada) VALUES ('" + ent + "')", Conectar());

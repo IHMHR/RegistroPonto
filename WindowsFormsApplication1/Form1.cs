@@ -156,20 +156,21 @@ namespace WindowsFormsApplication1
                     }
                 }*/
                 #endregion
-                DateTime ent, sai, entAlm, saiAlm;
                 if (!clt)
                 {
-                    ent = Convert.ToDateTime(dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text);
-                    sai = Convert.ToDateTime(dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
-                    new Estagiario().Inserir(dateTimePicker1.Visible, ent, dateTimePicker2.Visible, sai);   
+                    var est = new Estagiario();
+                    est.entrada = Convert.ToDateTime(dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text);
+                    est.saida = Convert.ToDateTime(dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
+                    est.Inserir(dateTimePicker1.Visible, dateTimePicker2.Visible);
                 }
                 else
                 {
-                    ent = Convert.ToDateTime(dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text);
-                    sai = Convert.ToDateTime(dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
-                    entAlm = Convert.ToDateTime(DpIdaDia.Value.ToString("yyyy-MM-dd") + " " + DpIdaHora.Text);
-                    saiAlm = Convert.ToDateTime(DpVoltaDia.Value.ToString("yyyy-MM-dd") + " " + DpVoltaHora.Text);
-                    new Funcionario().Inserir(dateTimePicker1.Visible, ent, DpIdaDia.Visible, entAlm, DpVoltaDia.Visible, saiAlm, dateTimePicker2.Visible, sai);
+                    var fun = new Funcionario();
+                    fun.entrada = Convert.ToDateTime(dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text);
+                    fun.saida = Convert.ToDateTime(dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
+                    fun.entrada_almoco = Convert.ToDateTime(DpIdaDia.Value.ToString("yyyy-MM-dd") + " " + DpIdaHora.Text);
+                    fun.saida_almoco = Convert.ToDateTime(DpVoltaDia.Value.ToString("yyyy-MM-dd") + " " + DpVoltaHora.Text);
+                    fun.Inserir(dateTimePicker1.Visible, DpIdaDia.Visible, DpVoltaDia.Visible, dateTimePicker2.Visible);
                 }
             }
             catch (Exception er)

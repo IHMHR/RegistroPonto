@@ -9,8 +9,8 @@ namespace WindowsFormsApplication1
     {
         public DateTime entrada { get; set; }
         public DateTime entrada_almoco { get; set; }
-        public DateTime said_almoco { get; set; }
-        public DateTime said { get; set; }
+        public DateTime saida_almoco { get; set; }
+        public DateTime saida { get; set; }
         private System.Data.SqlClient.SqlConnection Conectar()
         {
             try
@@ -40,63 +40,61 @@ namespace WindowsFormsApplication1
             }
         }
 
-        public void Inserir(bool usarentrada, DateTime entrada, bool usarentradaAlm, DateTime entradaAlm, bool usarsaidaAlm, DateTime saidaAlm, bool usarsaida, DateTime saida)
+        public void Inserir(bool usarentrada, bool usarentrada_almoco, bool usarsaida_almoco, bool usarsaida)
         {
             try
             {
-
-
-                if (usarentrada && usarsaida && !usarentradaAlm && !usarsaidaAlm)
+                if (usarentrada && usarsaida && !usarentrada_almoco && !usarsaida_almoco)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,saida) VALUES ('" + entrada + "','" + saida + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,saida) VALUES ('" + entrada.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentrada && !usarsaida && !usarentradaAlm && !usarsaidaAlm)
+                else if (usarentrada && !usarsaida && !usarentrada_almoco && !usarsaida_almoco)
                 {
-                     new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada) VALUES ('" + entrada + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada) VALUES ('" + entrada.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (!usarentrada && usarsaida && !usarentradaAlm && !usarsaidaAlm)
+                else if (!usarentrada && usarsaida && !usarentrada_almoco && !usarsaida_almoco)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (saida) VALUES ('" + saida + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (saida) VALUES ('" + saida.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentradaAlm && !usarentrada && !usarsaidaAlm && !usarsaida)
+                else if (usarentrada_almoco && !usarentrada && !usarsaida_almoco && !usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco) VALUES ('" + entradaAlm + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco) VALUES ('" + entrada_almoco + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarsaidaAlm && !usarentradaAlm && !usarentrada && !usarsaida)
+                else if (usarsaida_almoco && !usarentrada_almoco && !usarentrada && !usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (saida_almoco) VALUES ('" + saidaAlm + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (saida_almoco) VALUES ('" + saida_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentradaAlm && usarsaidaAlm && !usarentrada && !usarsaida)
+                else if (usarentrada_almoco && usarsaida_almoco && !usarentrada && !usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco,saida_almoco) VALUES ('" + entradaAlm + "','" + saidaAlm + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco,saida_almoco) VALUES ('" + entrada_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentrada && usarentradaAlm && !usarsaidaAlm && !usarsaida)
+                else if (usarentrada && usarentrada_almoco && !usarsaida_almoco && !usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,entrada_almoco) VALUES ('" + entrada + "','" + entradaAlm + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,entrada_almoco) VALUES ('" + entrada.ToString("yyyy-MM-dd HH:mm:ss") + "','" + entrada_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentradaAlm && usarsaidaAlm && usarentrada && !usarsaida)
+                else if (usarentrada_almoco && usarsaida_almoco && usarentrada && !usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,entrada_almoco,saida_almoco) VALUES ('" + entrada + "','" + entradaAlm + "','" + saidaAlm + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,entrada_almoco,saida_almoco) VALUES ('" + entrada.ToString("yyyy-MM-dd HH:mm:ss") + "','" + entrada_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (!usarentradaAlm && usarsaidaAlm && usarentrada && !usarsaida)
+                else if (!usarentrada_almoco && usarsaida_almoco && usarentrada && !usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,saida_almoco) VALUES ('" + entrada + "','" + saidaAlm + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,saida_almoco) VALUES ('" + entrada.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentradaAlm && usarsaidaAlm && usarentrada && usarsaida)
+                else if (usarentrada_almoco && usarsaida_almoco && usarentrada && usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,entrada_almoco,saida_almoco,saida) VALUES ('" + entrada + "','" + entradaAlm + "','" + saidaAlm + "','" + saida + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada,entrada_almoco,saida_almoco,saida) VALUES ('" + entrada.ToString("yyyy-MM-dd HH:mm:ss") + "','" + entrada_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentradaAlm && usarsaidaAlm && !usarentrada && usarsaida)
+                else if (usarentrada_almoco && usarsaida_almoco && !usarentrada && usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco,saida_almoco,saida) VALUES ('" + entradaAlm + "','" + saidaAlm + "','" + saida + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco,saida_almoco,saida) VALUES ('" + entrada_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarentradaAlm && !usarsaidaAlm && !usarentrada && usarsaida)
+                else if (usarentrada_almoco && !usarsaida_almoco && !usarentrada && usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco,saida) VALUES ('" + entradaAlm + "','" + saida + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (entrada_almoco,saida) VALUES ('" + entrada_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (!usarentradaAlm && usarsaidaAlm && !usarentrada && usarsaida)
+                else if (!usarentrada_almoco && usarsaida_almoco && !usarentrada && usarsaida)
                 {
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (saida_almoco,saida) VALUES ('" + said_almoco + "','" + saida + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_clt (saida_almoco,saida) VALUES ('" + saida_almoco.ToString("yyyy-MM-dd HH:mm:ss") + "','" + saida.ToString("yyyy-MM-dd HH:mm:ss") + "')", Conectar()).ExecuteNonQuery();
                 }
             }
             catch (Exception erro)

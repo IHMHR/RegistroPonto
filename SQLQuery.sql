@@ -195,12 +195,51 @@ DELETE FROM ponto_estagio WHERE saida IN (
 );
 
 
-SELECT * INTO ponto_estagio FROM BKP
+SELECT object_name(object_id) as procedure_executed, last_execution_time, last_elapsed_time, execution_count
+FROM   sys.dm_exec_procedure_stats ps 
+WHERE lower(object_name(object_id)) = 'usp_arrumar_estagio'
+ORDER BY last_execution_time DESC
+
+IF(DATEDIFF(DAY, (SELECT last_execution_time FROM   sys.dm_exec_procedure_stats ps WHERE lower(object_name(object_id)) = 'usp_arrumar_estagio'), GETDATE()) >= 1) BEGIN EXEC usp_arrumar_estagio END
+
+SELECT DATEDIFF(DAY, (SELECT last_execution_time FROM   sys.dm_exec_procedure_stats ps WHERE lower(object_name(object_id)) = 'usp_arrumar_estagio'), GETDATE())
+
+CREATE PROCEDURE usp_arrumar_clt
+AS
+BEGIN
+	DROP TABLE IF EXISTS entradas;
+	DROP TABLE IF EXISTS saidas;
+	DROP TABLE IF EXISTS vaialmocar;
+	DROP TABLE IF EXISTS voltaalmocar;
+
+	SELECT entrada INTO entradas FROM ponto_clt pc WHERE pc.entrada IS NOT NULL;
+	SELECT saida INTO saidas FROM ponto_clt pc WHERE pc.saida IS NOT NULL;
+	SELECT entrada_almoco INTO vaialmocar FROM ponto_clt pc WHERE pc.entrada_almoco IS NOT NULL;
+	SELECT saida_almoco INTO voltaalmocar FROM ponto_clt pc WHERE pc.saida_almoco IS NOT NULL;
+
+	DROP TABLE IF EXISTS ponto_clt;
+
+	SELECT * INTO ponto_clt FROM entradas 
+	FULL OUTER JOIN saidas ON 
+		CAST(DAY(entrada) AS VARCHAR) + N'' + CAST(MONTH(entrada)  AS VARCHAR) =	CAST(DAY(saida) AS VARCHAR) + N'' + CAST(MONTH(saida) AS VARCHAR)
+	FULL OUTER JOIN vaialmocar ON 
+		(CAST(DAY(entrada_almoco) AS VARCHAR) + N'' + CAST(MONTH(entrada) AS VARCHAR)	= CAST(DAY(entrada) AS VARCHAR) + N'' + CAST(MONTH(entrada)  AS VARCHAR) AND CAST(DAY(entrada_almoco) AS VARCHAR) + N'' + CAST(MONTH(entrada)  AS VARCHAR) = CAST(DAY(saida) AS VARCHAR) + N'' + CAST(MONTH(saida) AS VARCHAR))
+	FULL OUTER JOIN voltaalmocar ON 
+		(CAST(DAY(saida_almoco) AS VARCHAR) + N'' + CAST(MONTH(saida) AS VARCHAR) = CAST(DAY(entrada_almoco) AS VARCHAR) + N'' + CAST(MONTH(entrada) AS VARCHAR) AND CAST(DAY(saida_almoco) AS VARCHAR) + N'' + CAST(MONTH(saida) AS VARCHAR) = CAST(DAY(entrada) AS VARCHAR) + N'' + CAST(MONTH(entrada) AS VARCHAR) AND CAST(DAY(saida_almoco) AS VARCHAR) + N'' + CAST(MONTH(saida) AS VARCHAR) = CAST(DAY(entrada_almoco) AS VARCHAR) + N'' + CAST(MONTH(entrada) AS VARCHAR) AND CAST(DAY(saida_almoco) AS VARCHAR) + N'' + CAST(MONTH(saida) AS VARCHAR) = CAST(DAY(saida) AS VARCHAR) + N'' + CAST(MONTH(saida) AS VARCHAR))
+
+	IF ((SELECT COUNT(1) FROM ponto_estagio) > 0) BEGIN
+		DROP TABLE IF EXISTS entradas;
+		DROP TABLE IF EXISTS saidas;
+	END
+END
+GO
 
 
+SELECT * FROM ponto_clt
 
+EXEC usp_arrumar_clt
 
-
-
-
-
+IF(DATEDIFF(DAY, (SELECT last_execution_time FROM sys.dm_exec_procedure_stats ps WHERE lower(object_name(object_id)) = 'usp_arrumar_clt'), GETDATE()) >= 1) 
+BEGIN 
+	EXEC usp_arrumar_clt
+END

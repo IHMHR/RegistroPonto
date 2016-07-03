@@ -14,3 +14,5 @@ C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\
 C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
 C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb

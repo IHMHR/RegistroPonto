@@ -169,7 +169,7 @@ namespace WindowsFormsApplication1
                     sai = Convert.ToDateTime(dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
                     entAlm = Convert.ToDateTime(DpIdaDia.Value.ToString("yyyy-MM-dd") + " " + DpIdaHora.Text);
                     saiAlm = Convert.ToDateTime(DpVoltaDia.Value.ToString("yyyy-MM-dd") + " " + DpVoltaHora.Text);
-                    new class();
+                    new Funcionario().Inserir(dateTimePicker1.Visible, ent, DpIdaDia.Visible, entAlm, DpVoltaDia.Visible, saiAlm, dateTimePicker2.Visible, sai);
                 }
             }
             catch (Exception er)
@@ -239,7 +239,7 @@ namespace WindowsFormsApplication1
                     tabControl1.Height += 80;
                     if (clt)
                     {
-                        dataGridView1.DataSource = new class();
+                        dataGridView1.DataSource = new Funcionario().obterRelatorio();
                     }
                     else
                     {

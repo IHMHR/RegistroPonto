@@ -39,32 +39,26 @@ namespace WindowsFormsApplication1
             }
         }
 
-        public void Inserir(bool usarEntrada, DateTime entrada, bool usarSaida, DateTime saida)
+        public void Inserir(bool usarEntrada, DateTime entrada, bool usarsaida, DateTime saida)
         {
             try
             {
-                string ent = string.Empty;
-                string sai = string.Empty;
-                if (usarEntrada && usarSaida)
+                if (usarEntrada && usarsaida)
                 {
-                    ent = entrada.ToString();
-                    sai = saida.ToString();
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_estagio (entrada,saida) VALUES ('" + ent + "','" + sai + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_estagio (entrada,saida) VALUES ('" + entrada + "','" + saida + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (usarEntrada && !usarSaida)
+                else if (usarEntrada && !usarsaida)
                 {
-                    ent = entrada.ToString();
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_estagio (entrada) VALUES ('" + ent + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_estagio (entrada) VALUES ('" + entrada + "')", Conectar()).ExecuteNonQuery();
                 }
-                else if (!usarEntrada && usarSaida)
+                else if (!usarEntrada && usarsaida)
                 {
-                    sai = saida.ToString();
-                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_estagio (saida) VALUES ('" + sai + "')", Conectar()).ExecuteNonQuery();
+                    new System.Data.SqlClient.SqlCommand("INSERT INTO ponto_estagio (saida) VALUES ('" + saida + "')", Conectar()).ExecuteNonQuery();
                 }
             }
             catch (Exception erro)
             {
-                throw new Exception("obterRelatorio: " + erro);
+                throw new Exception("Inserir: " + erro);
             }
         }
     }

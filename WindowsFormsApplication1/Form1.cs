@@ -156,7 +156,21 @@ namespace WindowsFormsApplication1
                     }
                 }*/
                 #endregion
-                new Estagiario().Inserir(dateTimePicker1.Visible, dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text, dateTimePicker2.Visible, dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
+                DateTime ent, sai, entAlm, saiAlm;
+                if (!clt)
+                {
+                    ent = Convert.ToDateTime(dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text);
+                    sai = Convert.ToDateTime(dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
+                    new Estagiario().Inserir(dateTimePicker1.Visible, ent, dateTimePicker2.Visible, sai);   
+                }
+                else
+                {
+                    ent = Convert.ToDateTime(dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text);
+                    sai = Convert.ToDateTime(dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
+                    entAlm = Convert.ToDateTime(DpIdaDia.Value.ToString("yyyy-MM-dd") + " " + DpIdaHora.Text);
+                    saiAlm = Convert.ToDateTime(DpVoltaDia.Value.ToString("yyyy-MM-dd") + " " + DpVoltaHora.Text);
+                    new class();
+                }
             }
             catch (Exception er)
             {
@@ -183,20 +197,6 @@ namespace WindowsFormsApplication1
                     DpVoltaDia.Value = DateTime.Now;
                     DpVoltaHora.Value = DateTime.Now;
                 }
-            }
-        }
-
-        private SqlConnection Conectar()
-        {
-            try
-            {
-                SqlConnection con = new SqlConnection(Properties.Settings.Default.conString);
-                con.Open();
-                return con;
-            }
-            catch (Exception er)
-            {
-                throw new Exception("Conectar: " + er.Message.ToString());
             }
         }
 
@@ -239,16 +239,12 @@ namespace WindowsFormsApplication1
                     tabControl1.Height += 80;
                     if (clt)
                     {
-                        comando = new SqlCommand("SELECT * FROM vw_relatorio_clt ORDER BY Entrada ASC", Conectar());
+                        dataGridView1.DataSource = new class();
                     }
                     else
                     {
-                        comando = new SqlCommand("SELECT * FROM vw_relatorio_estagio ORDER BY Entrada ASC", Conectar());
+                        dataGridView1.DataSource = new Estagiario().obterRelatorio();
                     }
-                    SqlDataAdapter da = new SqlDataAdapter(comando);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dataGridView1.DataSource = dt;
                 }
                 else
                 {

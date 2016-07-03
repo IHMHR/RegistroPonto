@@ -10,3 +10,7 @@ C:\Users\Martinelli\Documents\GitHub\WindowsFormsApplication1\WindowsFormsApplic
 C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
 C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache

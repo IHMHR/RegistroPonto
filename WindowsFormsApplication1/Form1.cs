@@ -23,7 +23,8 @@ namespace WindowsFormsApplication1
         {
             try
             {
-                string ent = string.Empty;
+                #region Estruturado
+                /*string ent = string.Empty;
                 string sai = string.Empty;
                 string entAlm = string.Empty;
                 string saoAlm = string.Empty;
@@ -153,7 +154,9 @@ namespace WindowsFormsApplication1
                     {
                         MessageBox.Show("Você tem que registrar alguma ação.", "Qual o registro ?", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                }
+                }*/
+                #endregion
+                new Estagiario().Inserir(dateTimePicker1.Visible, dateTimePicker1.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker3.Text, dateTimePicker2.Visible, dateTimePicker2.Value.ToString("yyyy-MM-dd") + " " + dateTimePicker4.Text);
             }
             catch (Exception er)
             {

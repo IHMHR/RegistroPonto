@@ -1,0 +1,6 @@
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\BLL\bin\Debug\BLL.dll.config
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\BLL\bin\Debug\BLL.dll
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\BLL\bin\Debug\BLL.pdb
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\BLL\obj\Debug\BLL.dll
+C:\Users\Martinelli\Documents\GitHub\RegistroPonto\BLL\obj\Debug\BLL.pdb

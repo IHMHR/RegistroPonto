@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace WindowsFormsApplication1
+namespace BLL
 {
-    class Funcionario
+    public class Funcionario
     {
         public DateTime entrada { get; set; }
         public DateTime entrada_almoco { get; set; }
         public DateTime saida_almoco { get; set; }
         public DateTime saida { get; set; }
-        private System.Data.SqlClient.SqlConnection Conectar()
+        protected System.Data.SqlClient.SqlConnection Conectar()
         {
             try
             {
@@ -24,10 +21,16 @@ namespace WindowsFormsApplication1
                 throw new Exception("Conectar: " + er.Message.ToString());
             }
         }
-        public System.Data.DataTable obterRelatorio()
+        public virtual System.Data.DataTable obterRelatorio()
         {
             try
             {
+                // WHAT THIS LINE BELOW DOES:
+                // check the last time that the procedure 'usp_arrumar_estagio' ran
+                // if it's equal to 1 day or more run the procedure 'usp_arrumar_estagio' again
+                // else do nothing
+                new System.Data.SqlClient.SqlCommand("IF(DATEDIFF(DAY, (SELECT last_execution_time FROM sys.dm_exec_procedure_stats ps WHERE lower(object_name(object_id)) = 'usp_arrumar_clt'), GETDATE()) >= 1) BEGIN EXEC usp_arrumar_clt END", Conectar()).ExecuteNonQuery();
+
                 System.Data.DataTable dt = new System.Data.DataTable();
                 System.Data.SqlClient.SqlDataAdapter da = new System.Data.SqlClient.SqlDataAdapter(new System.Data.SqlClient.SqlCommand("SELECT * FROM vw_relatorio_clt ORDER BY entrada ASC", Conectar()));
                 da.Fill(dt);

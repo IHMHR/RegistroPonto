@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<form id="form1" runat="server">
+    <div id="main" class="main" style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+        <input type="button" name="estagiario" id="estagiario" value="Estagiario" />
+        <br />
+        <input type="button" name="clt" id="clt" value="Funcionário CLT" />
+    </div>
+    <div name="atibutos" id="atibutos" style="position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);display:none;">
+        <Label ID="Label1" Text="Entrada"></Label> <input type="text" ID="txtEntrada">
+        <br />
+        <Label ID="Label2" Text="Entrada Almoço"></Label> <input type="text" id="txtEntradaAlmoco">
+        <br />
+        <Label ID="Label3" Text="Saida Almoço"></Label> <input type="text" id="txtSaidaAlmoco">
+        <br />
+        <Label ID="Label4" Text="Saida"></Label> <input type="text" id="txtSaida">
+        <br />
+        <Button ID="Button1" Text="Registrar" />
+    </div>
+</form>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $("#estagiario").click(function () {
+        $("#main").css('display', 'none');
+        $("#atibutos").show();
+        $("#Label2").hide();
+        $("#Label3").hide();
+        $("#txtEntrada").hide();
+        $("#txtEntradaAlmoco").hide();
+        $("#txtSaidaAlmoco").hide();
+        $("#txtSaida").hide();
+    });
+
+    $("#clt").click(function () {
+        $("#main").css('display', 'none');
+        $("#atibutos").show();
+        $("#txtEntrada").hide();
+        $("#txtEntradaAlmoco").hide();
+        $("#txtSaidaAlmoco").hide();
+        $("#txtSaida").hide();
+    });
+
+    $("#Label1").click(function () {
+        if ($("#txtEntrada").css('display') == 'none') {
+            $("#txtEntrada").fadeIn("slow");
+        }
+        else {
+            $("#txtEntrada").fadeOut("slow");
+        }
+    });
+    $("#Label2").click(function () {
+        if ($("#txtEntradaAlmoco").css('display') == 'none') {
+            $("#txtEntradaAlmoco").fadeIn("slow");
+        }
+        else {
+            $("#txtEntradaAlmoco").fadeOut("slow");
+        }
+    });
+    $("#Label3").click(function () {
+        if ($("#txtSaidaAlmoco").css('display') == 'none') {
+            $("#txtSaidaAlmoco").fadeIn("slow");
+        }
+        else {
+            $("#txtSaidaAlmoco").fadeOut("slow");
+        }
+    });
+    $("#Label4").click(function () {
+        if ($("#txtSaida").css('display') == 'none') {
+            $("#txtSaida").fadeIn("slow");
+        }
+        else {
+            $("#txtSaida").fadeOut("slow");
+        }
+    });
+</script>

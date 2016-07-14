@@ -203,6 +203,7 @@ namespace WindowsFormsApplication1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label3.Visible = false;
             panel2.Visible = true;
             panel1.Visible = false;
             groupBox1.Visible = false;
@@ -233,25 +234,40 @@ namespace WindowsFormsApplication1
                 if ((int)tabControl1.SelectedIndex == 1)
                 {
                     // ABA RELATORIOS
+                    label3.Visible = !label3.Visible;
+                    label3.Text = string.Empty;
                     this.Width += 500;
                     this.Height += 80;
-                    panel1.Visible = false;
+                    button1.Visible = !button1.Visible;
                     tabControl1.Width += 500;
                     tabControl1.Height += 80;
                     if (clt)
                     {
                         dataGridView1.DataSource = new Funcionario().obterRelatorio();
+                        label3.Text = "Hora(s) extra(s): ";
+                        label3.Text += new Funcionario().obterHoraExtra() + ".";
+                        if(int.Parse(new Funcionario().obterHoraExtra()) < 0 )
+                        {
+                            label3.ForeColor = Color.Red;
+                        }
                     }
                     else
                     {
                         dataGridView1.DataSource = new Estagiario().obterRelatorio();
+                        label3.Text = "Hora(s) extra(s): ";
+                        label3.Text += new Estagiario().obterHoraExtra() + ".";
+                        if (int.Parse(new Estagiario().obterHoraExtra()) < 0)
+                        {
+                            label3.ForeColor = Color.Red;
+                        }
                     }
                 }
                 else
                 {
+                    label3.Visible = !label3.Visible;
                     this.Width -= 500;
                     this.Height -= 80;
-                    panel1.Visible = true;
+                    button1.Visible = !button1.Visible;
                     tabControl1.Width -= 500;
                     tabControl1.Height -= 80;
                 }
